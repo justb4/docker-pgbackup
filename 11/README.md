@@ -30,7 +30,7 @@ get our docker trusted build like this:
 
 
 ```
-docker pull justb4/pgbackup:$POSTGRES_VERSION
+docker pull justb4/pgbackup:11
 
 ```
 
@@ -60,7 +60,7 @@ To create a running container do:
 ```
 docker run --name="pgbackup"\
            -v backup:/backup -v /var/run/docker.sock:/var/run/docker.sock \
-           -i -d justb4/pgbackup:$POSTGRES_VERSION
+           -i -d justb4/pgbackup:11
 ```
            
 In this example a local dir (`./backup`) is mounted inti which the actual backups will be
@@ -76,8 +76,8 @@ version: "3"
 
 services:
   db:
-    image: mdillon/postgis:$POSTGRES_VERSION-alpine
-    container_name: pg_db_$POSTGRES_VERSION
+    image: mdillon/postgis:11-alpine
+    container_name: pg_db_11
     labels:
       - "pgbackup.enable=true"
     environment:
@@ -86,8 +86,8 @@ services:
       - POSTGRES_PASSWORD=testpass
 
   dbbackup:
-    image: justb4/pgbackup:$POSTGRES_VERSION
-    container_name: pg_backup_$POSTGRES_VERSION
+    image: justb4/pgbackup:11
+    container_name: pg_backup_11
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./backup:/backup

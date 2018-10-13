@@ -1,0 +1,22 @@
+# Test for pgbackup with sample db
+version: "3"
+
+services:
+  db:
+    image: mdillon/postgis:11-alpine
+    container_name: pg_db_11
+    labels:
+      - "pgbackup.enable=true"
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASSWORD=testpass
+
+  dbbackup:
+    image: justb4/pgbackup:11
+    container_name: pg_backup_11
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./backup:/backup
+    environment:
+      - PGB_SCHEDULE=*/1 * * * *
