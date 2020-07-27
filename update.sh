@@ -12,6 +12,7 @@ popd
 for version in ${versions}
 do
 	echo "Copy files into ${version}"
+	mkdir -p ${version}
 	cp -rp ${template_dir}/* ${version}
 
 	echo "Expanding ${version}"
