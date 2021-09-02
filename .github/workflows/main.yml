@@ -57,15 +57,21 @@ jobs:
       run: |
         DOCKER_IMAGE="justb4/pgbackup"
         VERSION="unknown"
-        if [[ ${{ needs.changes.outputs.pg9 == 'true' }} ]]; then
+        pg9=${{ needs.changes.outputs.pg9 }}
+        pg10=${{ needs.changes.outputs.pg10 }}
+        pg11=${{ needs.changes.outputs.pg11 }}
+        pg12=${{ needs.changes.outputs.pg12 }}
+        pg13=${{ needs.changes.outputs.pg13 }}
+
+        if [[ $pg9 == true ]]; then
          VERSION="9.6"
-        elif [[ ${{ needs.changes.outputs.pg10 == 'true' }} ]]; then
+        elif [[ $pg10 == true ]]; then
          VERSION="10"
-        elif [[ ${{ needs.changes.outputs.pg11 == 'true' }} ]]; then
+        elif [[ $pg11 == true ]]; then
          VERSION="11"
-        elif [[ ${{ needs.changes.outputs.pg12 == 'true' }} ]]; then
+        elif [[ $pg12 == true ]]; then
          VERSION="12"
-        elif [[ ${{ needs.changes.outputs.pg13 == 'true' }} ]]; then
+        elif [[ $pg13 == true ]]; then
          VERSION="13"
         fi
         TAGS="${DOCKER_IMAGE}:${VERSION}"
@@ -74,7 +80,6 @@ jobs:
         echo ::set-output name=version::${VERSION}
         echo ::set-output name=tags::${TAGS}
         echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-        echo "pg10=${{ needs.changes.outputs.pg10 }}"
 
     - name: Show Image Settings 📦
       run: echo "IMAGE=${{ steps.prep.outputs.image }} VERSION=${{ steps.prep.outputs.version }} TAGS=${{ steps.prep.outputs.tags }} SUBDIR=${{ steps.prep.outputs.subdir }}"
