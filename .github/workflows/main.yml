@@ -43,20 +43,24 @@ jobs:
           pg13:
             - '13/**'
 
+  # Job for Docker Build and Push
+  build:
+    needs: changes
+    steps:
     - name: Prepare 📦
       id: prep
       run: |
         DOCKER_IMAGE="justb4/pgbackup"
         VERSION="unknown"
-        if [[ ${{ steps.filter.outputs.pg9 }} ]]; then
+        if [[ ${{ needs.changes.outputs.pg9 == 'true' }} ]]; then
          VERSION="9.6"
-        elif [[ ${{ steps.filter.outputs.pg10 }} ]]; then
+        elif [[ ${{ needs.changes.outputs.pg10 == 'true' }} ]]; then
          VERSION="10"
-        elif [[ ${{ steps.filter.outputs.pg11 }} ]]; then
+        elif [[ ${{ needs.changes.outputs.pg11 == 'true' }} ]]; then
          VERSION="11"
-        elif [[ ${{ steps.filter.outputs.pg12 }} ]]; then
+        elif [[ ${{ needs.changes.outputs.pg12 == 'true' }} ]]; then
          VERSION="12"
-        elif [[ ${{ steps.filter.outputs.pg13 }} ]]; then
+        elif [[ ${{ needs.changes.outputs.pg13 == 'true' }} ]]; then
          VERSION="13"
         fi
         TAGS="${DOCKER_IMAGE}:${VERSION}"
