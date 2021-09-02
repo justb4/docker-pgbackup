@@ -185,4 +185,4 @@ Further changes:
 ## Credits
 
 * Tim Sutton (tim@kartoza.com) for https://github.com/kartoza/docker-pg-backup - Consulted Oct 2018
-* Just van den Broecke (https://justobjects.nl) - this version - 2018
+* Just van den Broecke (https://justobjects.nl) - this version - 2018-2021
