@@ -46,17 +46,17 @@ jobs:
       run: |
         DOCKER_IMAGE=justb4/pgbackup
         VERSION=unknown
-        if [[ ${{ steps.filter.outputs.pg9 == 'true' }} ]]; then
-         VERSION='9.6'
-        elif [[ ${{ steps.filter.outputs.pg10 == 'true' }} ]]; then
-         VERSION='10'
-        elif [[ ${{ steps.filter.outputs.pg11 == 'true' }} ]]; then
-         VERSION='11'
-        elif [[ ${{ steps.filter.outputs.pg12 == 'true' }} ]]; then
-         VERSION='12'
-        elif [[ ${{ steps.filter.outputs.pg13 == 'true' }} ]]; then
-         VERSION='13'
-        fi
+#        if [[ ${{ steps.filter.outputs.pg9 == 'true' }} ]]; then
+#         VERSION='9.6'
+#        elif [[ ${{ steps.filter.outputs.pg10 == 'true' }} ]]; then
+#         VERSION='10'
+#        elif [[ ${{ steps.filter.outputs.pg11 == 'true' }} ]]; then
+#         VERSION='11'
+#        elif [[ ${{ steps.filter.outputs.pg12 == 'true' }} ]]; then
+#         VERSION='12'
+#        elif [[ ${{ steps.filter.outputs.pg13 == 'true' }} ]]; then
+#         VERSION='13'
+#        fi
 
         TAGS="${DOCKER_IMAGE}:${VERSION}"
         echo ::set-output name=subdir::${VERSION}
