@@ -24,7 +24,9 @@ jobs:
       pg13: ${{ steps.filter.outputs.pg13 }}
 
     steps:
-    # For pull requests it's not necessary to checkout the code
+    - name: Checkout 📦
+      uses: actions/checkout@v2
+      
     - name: Pathfilter 📦
       uses: dorny/paths-filter@v2
       id: filter
