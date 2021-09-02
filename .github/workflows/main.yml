@@ -46,6 +46,8 @@ jobs:
   # Job for Docker Build and Push
   build:
     needs: changes
+    runs-on: ubuntu-latest
+
     steps:
     - name: Prepare 📦
       id: prep
