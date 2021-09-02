@@ -48,15 +48,15 @@ jobs:
       run: |
         DOCKER_IMAGE="justb4/pgbackup"
         VERSION="unknown"
-        if [[ ${{ steps.filter.outputs.pg9 == 'true' }} ]]; then
+        if [[ ${{ steps.filter.outputs.pg9 }} ]]; then
          VERSION="9.6"
-        elif [[ ${{ steps.filter.outputs.pg10 == 'true' }} ]]; then
+        elif [[ ${{ steps.filter.outputs.pg10 }} ]]; then
          VERSION="10"
-        elif [[ ${{ steps.filter.outputs.pg11 == 'true' }} ]]; then
+        elif [[ ${{ steps.filter.outputs.pg11 }} ]]; then
          VERSION="11"
-        elif [[ ${{ steps.filter.outputs.pg12 == 'true' }} ]]; then
+        elif [[ ${{ steps.filter.outputs.pg12 }} ]]; then
          VERSION="12"
-        elif [[ ${{ steps.filter.outputs.pg13 == 'true' }} ]]; then
+        elif [[ ${{ steps.filter.outputs.pg13 }} ]]; then
          VERSION="13"
         fi
         TAGS="${DOCKER_IMAGE}:${VERSION}"
@@ -70,16 +70,18 @@ jobs:
       run: echo "IMAGE=${{ steps.prep.outputs.image }} VERSION=${{ steps.prep.outputs.version }} TAGS=${{ steps.prep.outputs.tags }} SUBDIR=${{ steps.prep.outputs.subdir }}"
 
     - name: Set up Docker Buildx 📦
+      if: steps.prep.outputs.version != 'unknown'
       uses: docker/setup-buildx-action@v1
 
     - name: Login to DockerHub 📦
-      if: github.event_name != 'pull_request'
+      if: steps.prep.outputs.version != 'unknown'
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Docker Build and Push 📦
+      if: steps.prep.outputs.version != 'unknown'
       uses: docker/build-push-action@v2
       with:
         context: ${{ steps.prep.outputs.subdir }}
