@@ -44,26 +44,26 @@ jobs:
     - name: Prepare 📦
       id: prep
       run: |
-       DOCKER_IMAGE=justb4/pgbackup
-       VERSION=unknown
-       if [[ ${{ steps.filter.outputs.pg9 == 'true' }} ]]; then
+        DOCKER_IMAGE=justb4/pgbackup
+        VERSION=unknown
+        if [[ ${{ steps.filter.outputs.pg9 == 'true' }} ]]; then
          VERSION='9.6'
-       elif [[ ${{ steps.filter.outputs.pg10 == 'true' ]]; then
+        elif [[ ${{ steps.filter.outputs.pg10 == 'true' }} ]]; then
          VERSION='10'
-       elif [[ ${{ steps.filter.outputs.pg11 == 'true' ]]; then
+        elif [[ ${{ steps.filter.outputs.pg11 == 'true' }} ]]; then
          VERSION='11'
-       elif [[ ${{ steps.filter.outputs.pg12 == 'true' ]]; then
+        elif [[ ${{ steps.filter.outputs.pg12 == 'true' }} ]]; then
          VERSION='12'
-       elif [[ ${{ steps.filter.outputs.pg13 == 'true' ]]; then
+        elif [[ ${{ steps.filter.outputs.pg13 == 'true' }} ]]; then
          VERSION='13'
-       fi
+        fi
 
-       TAGS="${DOCKER_IMAGE}:${VERSION}"
-       echo ::set-output name=subdir::${VERSION}
-       echo ::set-output name=image::${DOCKER_IMAGE}
-       echo ::set-output name=version::${VERSION}
-       echo ::set-output name=tags::${TAGS}
-       echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+        TAGS="${DOCKER_IMAGE}:${VERSION}"
+        echo ::set-output name=subdir::${VERSION}
+        echo ::set-output name=image::${DOCKER_IMAGE}
+        echo ::set-output name=version::${VERSION}
+        echo ::set-output name=tags::${TAGS}
+        echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
      - name: Show Image Settings 📦
        run: echo "IMAGE=${{ steps.prep.outputs.image }} VERSION=${{ steps.prep.outputs.version }} TAGS=${{ steps.prep.outputs.tags }} SUBDIR=${{ steps.prep.outputs.subdir }}"
