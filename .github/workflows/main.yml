@@ -49,6 +49,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout 📦
+      uses: actions/checkout@v2
+
     - name: Prepare 📦
       id: prep
       run: |
@@ -71,6 +74,7 @@ jobs:
         echo ::set-output name=version::${VERSION}
         echo ::set-output name=tags::${TAGS}
         echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+        echo "pg10=${{ needs.changes.outputs.pg10 }}"
 
     - name: Show Image Settings 📦
       run: echo "IMAGE=${{ steps.prep.outputs.image }} VERSION=${{ steps.prep.outputs.version }} TAGS=${{ steps.prep.outputs.tags }} SUBDIR=${{ steps.prep.outputs.subdir }}"
