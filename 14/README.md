@@ -28,7 +28,6 @@ There are various ways to get the image onto your system:
 The preferred way (but using most bandwidth for the initial image) is to
 get our docker trusted build like this:
 
-
 ```
 docker pull justb4/pgbackup:14
 
