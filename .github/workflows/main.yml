@@ -25,6 +25,7 @@ jobs:
       pg14: ${{ steps.filter.outputs.pg14 }}
       pg15: ${{ steps.filter.outputs.pg15 }}
       pg16: ${{ steps.filter.outputs.pg16 }}
+      pg17: ${{ steps.filter.outputs.pg17 }}
 
     steps:
     - name: Checkout 📦
@@ -51,6 +52,8 @@ jobs:
             - '15/**'
           pg16:
             - '16/**'
+          pg17:
+            - '17/**'
 
   # Job for Docker Build and Push
   build:
@@ -74,6 +77,7 @@ jobs:
         pg14=${{ needs.changes.outputs.pg14 }}
         pg15=${{ needs.changes.outputs.pg15 }}
         pg16=${{ needs.changes.outputs.pg16 }}
+        pg17=${{ needs.changes.outputs.pg17 }}
 
         if [[ $pg9 == true ]]; then
          VERSION="9.6"
@@ -89,8 +93,10 @@ jobs:
          VERSION="14"
         elif [[ $pg15 == true ]]; then
          VERSION="15"
-        elif [[ $pg15 == true ]]; then
+        elif [[ $pg16 == true ]]; then
          VERSION="16"
+        elif [[ $pg17 == true ]]; then
+         VERSION="17"
         fi
         TAGS="${DOCKER_IMAGE}:${VERSION}"
         echo ::set-output name=subdir::${VERSION}

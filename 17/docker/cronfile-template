@@ -1,0 +1,4 @@
+# Schedule supplied via env var
+${PGB_SCHEDULE} /pgbackup/backup-all.sh 2>&1
+
+# We need a blank line here for it to be a valid cron file

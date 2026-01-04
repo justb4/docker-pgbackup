@@ -1,6 +1,4 @@
 # Test for pgbackup with sample db
-version: "3"
-
 services:
   db:
     image: mdillon/postgis:$POSTGRES_VERSION-alpine
