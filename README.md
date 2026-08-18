@@ -18,7 +18,7 @@ variables set (see below).
 By default it will create a backup once per night (at 23:00) in a 
 nicely ordered directory by container-name/year/month, but you can specify your own schedule.
 
-* Docker hub at: https://registry.hub.docker.com/u/justb4/pgbackup/
+* Docker Image: https://hub.docker.com/r/justb4/pgbackup
 * Github at: https://github.com/justb4/docker-pgbackup
 
 ## Getting the image
